@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+  
+  <br>
+  <br>
+  <figure class="text-center my-4">
+    <blockquote class="blockquote">
+      <h1>Download Video and Audio from YouTube</h1>
+    </blockquote>
+    <br>
+    <br>
+    <br>
+    <form class="form-text-center" action="/search" method="POST">
+      <div style="display: flex; justify-content: center;">
+        <input type="url" name="user_url" class="form-control" id="user_url" placeholder="Paste YouTube Video Link Here"
+          style="width: 50%; margin-right: 10px;" required>
+        <button type="submit" class="btn btn-outline-danger" style="margin-left: 10px;">Search</button>
+      </div>
+    </form>
+    <br>
+    <br>
+    {% if title %}
+      <p class="text-center fs-5 fw-bold my-2">{{ title }}</p>
+      <br>
+      <div class="btn-group my-4">
+        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Download Video
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=144p">144p</a></li>
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=240p">240p</a></li>
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=360p">360p</a></li>
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=480p">480p</a></li>
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=720p">720p</a></li>
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=1080p">1080p (HD)</a></li>
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=2k">1440p (2K)</a></li>
+          <li><a class="dropdown-item text-success fw-bold fs-5" href="/downloading_video=4k">2160p (4K)</a></li>
+        </ul>
+        <a href="/downloading_audio" type="button" class="btn btn-success mx-4">Download Audio</a>
+      </div>
+    {% endif %}
+
+    <div class="container mt-4">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{% if category == 'success' %}success{% else %}danger{% endif %}" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </figure>
+{% endblock content %}
+</body>
+
+</html>

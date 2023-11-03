@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br>
+    <br>
+    <div class="container mt-4">
+        <form action="/contactus" method="POST">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-text">First Name</span>
+                        <input type="text" name="user_first_name" placeholder="First Name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-text">Last Name</span>
+                        <input type="text" name="user_last_name" placeholder="Last Name" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="email" name="user_email" class="form-control" placeholder="Email" required>
+                        <span class="input-group-text" id="user_email">@example.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <div class="form-floating">
+                        <textarea class="form-control" name="user_message" placeholder="Write Your Message Here"
+                            style="height: 100px" required></textarea>
+                        <label for="user_message">Write Your Message Here</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container mt-4 text-center">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{% if category == 'success_email' %}success{% else %}danger{% endif %}" role="alert">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endblock content %}

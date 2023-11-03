@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center text-info bg-dark mt-5">Welcome to Number Guessing Game</h2>
+    <br>
+    <h3 class="text-center text-color-dark fw-bold">Guess a Number Between (1 to 100)</h3>
+    <form action="/guessinggame" method="POST">
+        <div class="input-group d-flex justify-content-center my-5">
+            <input type="text" name="guessedNumber" class="form-control form-control-lg" style="max-width: 100px; font-weight: bold; text-align: center;" placeholder="Guess" aria-label="Username" aria-describedby="addon-wrapping" required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-info">Check Now</button>
+        </div>
+    </form>
+    <br>
+    <br>
+    <p class="text-center fw-bold text-danger fs-5">Remaining Chances: {{ point }}</p>
+    <div class="container mt-4 text-center">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{% if category == 'right' %}success{% elif category == 'lose' %}danger{% elif category == 'low' %}primary{% else %}warning{% endif %}" role="alert">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endblock content %}
